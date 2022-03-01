@@ -1,0 +1,503 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Phags-pa script typer</title>
+<meta charset="utf-8">
+
+    <script type="text/javascript">
+
+     
+var conversion = {
+"k": "ꡀ", //A842 
+"kh": "ꡁ", //A840
+"g": "ꡂ", //A841
+"ng": "ꡃ", //A843
+"c": "ꡄ", //A844
+"ch": "ꡅ", //A845
+"j": "ꡆ", //A846
+"ny": "ꡇ", //A847
+"t": "ꡈ", //A848
+"th": "ꡉ", //A849
+"d": "ꡊ", //A84A
+"n": "ꡋ", //A84B
+
+"p": "ꡎ", //A84C
+"ph": "ꡍ", //A84D
+"b": "ꡌ", //A84E
+"m": "ꡏ", //A84F
+"ts": "ꡐ", //A850
+"tsh": "ꡑ", //A851
+"dz": "ꡒ", //A852
+"v": "ꡓ", //A853
+"zh": "ꡔ", //A854
+"z": "ꡕ", //A855
+"-a": "ꡖ", //A856
+"y": "ꡗ", //A857
+"r": "ꡘ", //A858
+"l": "ꡙ", //A859
+"sh": "ꡚ", //A85A
+"s": "ꡛ", //A85B
+"h": "ꡜ", //A85C
+"a": "ꡝ", //A85D
+"i": "ꡞ", //A85E
+"u": "ꡟ", //A85F
+"e": "ꡠ", //A860
+"o": "ꡡ", //A861
+"q": "ꡢ", //A862
+"x": "ꡣ", //A863
+"f": "ꡤ", //A864
+"gg": "ꡥ", //A865
+"ee": "ꡦ", //A866
+"w": "ꡧ", //A867
+"y": "ꡨ", //A868
+"tt": "ꡩ", //A869
+"TT": "ꡪ", //A86A
+"dd": "ꡫ", //A86B
+"nn": "ꡬ", //A86C
+"-y": "ꡭ", //A86D
+"sh": "ꡮ", //A86E
+"H": "ꡯ", //A86F
+"F": "ꡰ", //A870
+"-r": "ꡱ", //A871
+"R": "ꡲ", //A872
+"C": "ꡳ", //A873
+"[": "꡴", //A874
+"[[": "꡵", //A875
+".": "꡶", //A876
+"..": "꡷", //A877
+"q": "&#8203;",
+
+        };
+
+ var maxLength = Object.keys(conversion)
+    .reduce((a, b) => a.length > b.length ? a : b) // get the longest word
+    .length; // and it's length
+  
+  function convert (text) {
+    var converted = "";
+    var cur = 0;
+    while (cur < text.length) {
+      var testedPhoneme;
+      var symbol = undefined;
+      for (var length = maxLength; length > 0; length --) {
+        testedPhoneme = text.substr(cur, length);
+        if (conversion[testedPhoneme]) {
+          symbol = conversion[testedPhoneme];
+          break; // stop the loop
+        }
+      }
+      if (symbol) {
+        converted += symbol;
+        cur += testedPhoneme.length;
+      }
+      else {
+        converted += text[cur]
+        cur++;
+      }
+    }
+    return converted
+  }
+
+  function onInputTextChange(txt) {
+    var outputTextareaElem = document.getElementById("output_textarea");
+    var div = document.createElement("div");
+    var outputHtmlEntities = convert(txt);
+    div.innerHTML = outputHtmlEntities;
+    outputTextareaElem.value = div.innerText;
+  }
+
+
+        function select() {
+          const input = document.getElementById('input_textarea');
+          input.focus();
+          input.select();
+        }   
+        function copytext() {
+          var copyText = document.getElementById("output_textarea");
+          copyText.select();
+          copyText.setSelectionRange(0, 99999)
+          document.execCommand("copy");
+        }
+
+    </script>
+    
+<style>
+table {
+  border-collapse: collapse;
+  width: 70%;
+}
+td, th {
+  border: 1px solid #AAA;
+  text-align: center;
+  padding: 1px;
+}
+textarea {
+	font-size: 13pt;
+	font-family: Arial;
+    width: 96%;
+} 
+.note {
+  border: 1px solid #DDD;
+  width: 10%;
+  text-align: left;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+</style>
+
+
+</head>
+<body>  
+
+<body>  
+
+<center><h1 class="text-center">Phags-pa script typer</h1>
+</center>
+ 
+<center>
+<table>
+<thead>
+<tr>
+<th>	
+<button onclick="select('input_textarea')">Select all</button>
+<button onclick="document.getElementById('input_textarea').value = ''">Clear</button>
+</th>
+<th>
+<button onclick="copytext()">Copy text</button>
+</th>
+<th>Conversion table</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<textarea
+id="input_textarea"
+autofocus=""
+placeholder="Input text here"
+rows="10"
+oninput="onInputTextChange(this.value)"></textarea>    
+</td>
+<td>
+<textarea rows="10" class="pp" placeholder="output" id="output_textarea"></textarea>    
+</td>
+<td>
+<center>
+<div style="overflow-y: scroll; height:200px; width:200px">
+
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Phags-pa</th>
+<th>Unicode</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>k</td>
+<td>ꡀ</td>
+<td>A842 </td>
+</tr>
+<tr>
+<td>kh</td>
+<td>ꡁ</td>
+<td>A840</td>
+</tr>
+<tr>
+<td>g</td>
+<td>ꡂ</td>
+<td>A841</td>
+</tr>
+<tr>
+<td>ng</td>
+<td>ꡃ</td>
+<td>A843</td>
+</tr>
+<tr>
+<td>c</td>
+<td>ꡄ</td>
+<td>A844</td>
+</tr>
+<tr>
+<td>ch</td>
+<td>ꡅ</td>
+<td>A845</td>
+</tr>
+<tr>
+<td>j</td>
+<td>ꡆ</td>
+<td>A846</td>
+</tr>
+<tr>
+<td>ny</td>
+<td>ꡇ</td>
+<td>A847</td>
+</tr>
+<tr>
+<td>t</td>
+<td>ꡈ</td>
+<td>A848</td>
+</tr>
+<tr>
+<td>th</td>
+<td>ꡉ</td>
+<td>A849</td>
+</tr>
+<tr>
+<td>d</td>
+<td>ꡊ</td>
+<td>A84A</td>
+</tr>
+<tr>
+<td>n</td>
+<td>ꡋ</td>
+<td>A84B</td>
+</tr>
+<tr>
+<td>p</td>
+<td>ꡎ</td>
+<td>A84C</td>
+</tr>
+<tr>
+<td>ph</td>
+<td>ꡍ</td>
+<td>A84D</td>
+</tr>
+<tr>
+<td>b</td>
+<td>ꡌ</td>
+<td>A84E</td>
+</tr>
+<tr>
+<td>m</td>
+<td>ꡏ</td>
+<td>A84F</td>
+</tr>
+<tr>
+<td>ts</td>
+<td>ꡐ</td>
+<td>A850</td>
+</tr>
+<tr>
+<td>tsh</td>
+<td>ꡑ</td>
+<td>A851</td>
+</tr>
+<tr>
+<td>dz</td>
+<td>ꡒ</td>
+<td>A852</td>
+</tr>
+<tr>
+<td>v</td>
+<td>ꡓ</td>
+<td>A853</td>
+</tr>
+<tr>
+<td>zh</td>
+<td>ꡔ</td>
+<td>A854</td>
+</tr>
+<tr>
+<td>z</td>
+<td>ꡕ</td>
+<td>A855</td>
+</tr>
+<tr>
+<td>-a</td>
+<td>ꡖ</td>
+<td>A856</td>
+</tr>
+<tr>
+<td>y</td>
+<td>ꡗ</td>
+<td>A857</td>
+</tr>
+<tr>
+<td>r</td>
+<td>ꡘ</td>
+<td>A858</td>
+</tr>
+<tr>
+<td>l</td>
+<td>ꡙ</td>
+<td>A859</td>
+</tr>
+<tr>
+<td>sh</td>
+<td>ꡚ</td>
+<td>A85A</td>
+</tr>
+<tr>
+<td>s</td>
+<td>ꡛ</td>
+<td>A85B</td>
+</tr>
+<tr>
+<td>h</td>
+<td>ꡜ</td>
+<td>A85C</td>
+</tr>
+<tr>
+<td>a</td>
+<td>ꡝ</td>
+<td>A85D</td>
+</tr>
+<tr>
+<td>i</td>
+<td>ꡞ</td>
+<td>A85E</td>
+</tr>
+<tr>
+<td>u</td>
+<td>ꡟ</td>
+<td>A85F</td>
+</tr>
+<tr>
+<td>e</td>
+<td>ꡠ</td>
+<td>A860</td>
+</tr>
+<tr>
+<td>o</td>
+<td>ꡡ</td>
+<td>A861</td>
+</tr>
+<tr>
+<td>q</td>
+<td>ꡢ</td>
+<td>A862</td>
+</tr>
+<tr>
+<td>x</td>
+<td>ꡣ</td>
+<td>A863</td>
+</tr>
+<tr>
+<td>f</td>
+<td>ꡤ</td>
+<td>A864</td>
+</tr>
+<tr>
+<td>gg</td>
+<td>ꡥ</td>
+<td>A865</td>
+</tr>
+<tr>
+<td>ee</td>
+<td>ꡦ</td>
+<td>A866</td>
+</tr>
+<tr>
+<td>w</td>
+<td>ꡧ</td>
+<td>A867</td>
+</tr>
+<tr>
+<td>y</td>
+<td>ꡨ</td>
+<td>A868</td>
+</tr>
+<tr>
+<td>tt</td>
+<td>ꡩ</td>
+<td>A869</td>
+</tr>
+<tr>
+<td>TT</td>
+<td>ꡪ</td>
+<td>A86A</td>
+</tr>
+<tr>
+<td>dd</td>
+<td>ꡫ</td>
+<td>A86B</td>
+</tr>
+<tr>
+<td>nn</td>
+<td>ꡬ</td>
+<td>A86C</td>
+</tr>
+<tr>
+<td>-y</td>
+<td>ꡭ</td>
+<td>A86D</td>
+</tr>
+<tr>
+<td>sh</td>
+<td>ꡮ</td>
+<td>A86E</td>
+</tr>
+<tr>
+<td>H</td>
+<td>ꡯ</td>
+<td>A86F</td>
+</tr>
+<tr>
+<td>F</td>
+<td>ꡰ</td>
+<td>A870</td>
+</tr>
+<tr>
+<td>-r</td>
+<td>ꡱ</td>
+<td>A871</td>
+</tr>
+<tr>
+<td>R</td>
+<td>ꡲ</td>
+<td>A872</td>
+</tr>
+<tr>
+<td>C</td>
+<td>ꡳ</td>
+<td>A873</td>
+</tr>
+<tr>
+<td>[</td>
+<td>꡴</td>
+<td>A874</td>
+</tr>
+<tr>
+<td>[[</td>
+<td>꡵</td>
+<td>A875</td>
+</tr>
+<tr>
+<td>.</td>
+<td>꡶</td>
+<td>A876</td>
+</tr>
+<tr>
+<td>..</td>
+<td>꡷</td>
+<td>A877</td>
+</tr>
+<tr>
+<td>q</td>
+<td>character<br>breaker</td>
+<td>200B</td>
+</tr>
+</tbody>
+</table>
+
+
+
+</div>
+</center>
+</td>
+</tr>
+</tbody>
+</table>
+	
+</center>
+
+
+
+
+</body>
+</html>
